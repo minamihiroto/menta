@@ -3,7 +3,7 @@
 db='menta_db'
 user='root'
 pass='hiroto373'
-backupdir='/home/menta/db_backup'
+backupdir='/var/www/db_backup'
 num=7
 
 filename=${db}_`date +%y%m%d_%H%M`.sql

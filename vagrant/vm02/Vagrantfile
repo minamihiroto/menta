@@ -1,0 +1,8 @@
+Vagrant.configure("2") do |config|
+  config.vm.box = "centos/7"
+  config.vm.hostname = "menta.me"
+  config.vm.network "private_network", ip: "192.168.33.10"
+  config.vm.synced_folder "./shared/php-fpm", "/etc/php-fpm.d", owner: "vagrant", group: "vagrant"
+  config.vm.synced_folder "./shared/nginx", "/etc/nginx/conf.d", owner: "vagrant", group: "vagrant"
+  config.vm.synced_folder "./shared/shell", "/var/www", owner: "vagrant", group: "vagrant"
+end

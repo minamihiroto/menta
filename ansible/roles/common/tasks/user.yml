@@ -1,0 +1,27 @@
+- name: create user
+  user:
+    name: "{{ item.name }}"
+    createhome: yes
+    password: "{{ item.password | password_hash('sha512') }}"
+    shell: "{{ item.shell }}"
+    groups: "{{ item.groups }}"
+    state: "{{ item.state }}"
+    remove: "{{ item.remove }}"
+  loop:
+  - { shell: '/bin/bash', groups: 'wheel', state: 'present', remove: 'no', name: 'minami', password: 'password' }
+
+
+- name: add sudoers
+  lineinfile:
+    path: /etc/sudoers
+    state: present
+    regexp: "{{ item.match }}"
+    line: "{{ item.line }}"
+  loop:
+  - { match: 'minami', line: 'minami ALL=(ALL) NOPASSWD: ALL' }
+
+- name: authorized_key for user minami
+  ignore_errors: true
+  authorized_key:
+    user: minami
+    key: "ssh-rsa minami"

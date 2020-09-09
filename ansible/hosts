@@ -1,5 +1,5 @@
 [web]
-menta
+vagrant
 #group
-[stg:children]
+[dev:children]
 web

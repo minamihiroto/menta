@@ -1,6 +1,3 @@
-- hosts: menta
+- hosts: vagrant
   roles:
     - common
-    - h2o
-    - php
-    - mysql

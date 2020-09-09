@@ -5,8 +5,8 @@
     - zsh
     - git
     - tree
-    # - htop エラー文：No package matching 'htop' found available, installed or updated
-    # - iftop エラー文：No package matching 'iftop' found available, installed or updated
+    - htop
+    - iftop
     - mlocate
     - telnet
     - wget

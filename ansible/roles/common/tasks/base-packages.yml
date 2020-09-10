@@ -5,8 +5,8 @@
     - zsh
     - git
     - tree
-    - htop
-    - iftop
+    # - htop
+    # - iftop
     - mlocate
     - telnet
     - wget

@@ -21,14 +21,14 @@
 - name: start php-fpm
   systemd: name=php-fpm state=started enabled=yes
 
-# - name: copy php-fpm www.conf
-#   copy:
-#     src: "roles/php/files/{{ item.src }}"
-#     dest: "/etc/php-fpm.d/{{ item.dest }}"
-#     backup: no
-#     owner: root
-#     group: root
-#     mode: 0644
-#   loop:
-#     - { src: "www.conf", dest: . }
-#   notify: restart php-fpm
+- name: copy php-fpm www.conf
+  copy:
+    src: "roles/php/files/{{ item.src }}"
+    dest: "/etc/php-fpm.d/{{ item.dest }}"
+    backup: no
+    owner: root
+    group: root
+    mode: 0644
+  loop:
+    - { src: "www.conf", dest: . }
+  notify: restart php-fpm

@@ -1,3 +1,5 @@
 - hosts: vagrant
   roles:
     - common
+    - nginx
+    

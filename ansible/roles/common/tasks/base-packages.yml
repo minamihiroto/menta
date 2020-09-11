@@ -1,0 +1,17 @@
+- name: yum install bacepackage
+  yum: name={{ item }} state=present
+  loop:
+    - vim
+    - zsh
+    - git
+    - tree
+    - htop
+    - iftop
+    - mlocate
+    - telnet
+    - wget
+    - ipa-pgothic-fonts
+    - openssl
+
+- name: stop firewalld
+  systemd: name=firewalld enabled=no state=stopped

@@ -1,0 +1,27 @@
+- name: create user
+  user:
+    name: "{{ item.name }}"
+    createhome: yes
+    password: "{{ item.password | password_hash('sha512') }}"
+    shell: "{{ item.shell }}"
+    groups: "{{ item.groups }}"
+    state: "{{ item.state }}"
+    remove: "{{ item.remove }}"
+  loop:
+  - { shell: '/bin/bash', groups: 'wheel', state: 'present', remove: 'no', name: 'menta', password: 'password' }
+
+
+- name: add sudoers
+  lineinfile:
+    path: /etc/sudoers
+    state: present
+    regexp: "{{ item.match }}"
+    line: "{{ item.line }}"
+  loop:
+  - { match: 'menta', line: 'menta ALL=(ALL) NOPASSWD: ALL' }
+
+- name: authorized_key for user menta
+  ignore_errors: true
+  authorized_key:
+    user: menta
+    key: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDT35ro4OEA2vRCsyzzgCzhHQa8OtuQJEHXmObr5KLUxnQX61mk6rkcXWRFUCn8sl0I0VqVLgd4NRU3GTqTDoq8HGQGmd8/5dgC1iFHM2JeynQ8ilTqTF3yeeyd5vD3b5+HQu9Fb+ZEaAcZRPdG/6hzG688oH+kDflW6mKAfDBkBu6NGikO2GzX9eyN4BRIt8/58U48/x+vV74kOcsQeg/LiUpBdrbHj1CE/YMGx1w+YIll6xALwqjUHgkrx/i8Q8J647QV+l5STKKv9Doz3EgMfNdER7cgaHwOH75mMVb4FRx7ybRyAvoIWSfLDQoHEXza/77USAVqejeOEk6FGeLJ8gpmAwhon2m47rvk/Q6Em0DWtfL7hzSVOHRaU02zay+blshF7HP4TpiJ9sG+2fqlFNjE4klGDSkojkXBc3rQVTYw7ZWG1aqLa1U8uGQ4sFa1QSS4HZDrIbCseS1NkuEPIQDvv/yYdQ34+2oyy2ZgxY/30WkYwIZOnEx/i3POtJk= minami@HappyWorld.local"

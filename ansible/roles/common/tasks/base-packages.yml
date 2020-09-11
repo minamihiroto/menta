@@ -5,12 +5,13 @@
     - zsh
     - git
     - tree
-    # - htop
-    # - iftop
+    - htop
+    - iftop
     - mlocate
     - telnet
     - wget
     - ipa-pgothic-fonts
+    - openssl
 
 - name: stop firewalld
   systemd: name=firewalld enabled=no state=stopped

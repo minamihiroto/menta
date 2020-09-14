@@ -21,6 +21,17 @@
 - name: start php-fpm
   systemd: name=php-fpm state=started enabled=yes
 
+- name: copy php.ini
+  copy:
+    src: "roles/php/files/{{ item.src }}"
+    dest: "/etc/{{ item.dest }}"
+    backup: no
+    owner: root
+    group: root
+    mode: 0644
+  loop:
+    - { src: "php.ini", dest: . }
+
 - name: copy php-fpm www.conf
   copy:
     src: "roles/php/files/{{ item.src }}"
